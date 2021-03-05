@@ -3,20 +3,22 @@ import { CommonModule } from '@angular/common';
 import { BeerComponent } from './beer/beer.component';
 import { ReviewComponent } from './review/review.component'
 import { MaterialModule } from './../material/material.module';
+import { BeerListComponent } from './beer-list/beer-list.component';
 
 
 
 @NgModule({
   declarations: [
     BeerComponent,
-    ReviewComponent
+    ReviewComponent,
+    BeerListComponent
   ],
   imports: [
     CommonModule,
     MaterialModule
   ],
   exports: [
-    BeerComponent
+    BeerListComponent
   ]
 })
 export class BeerModule { }

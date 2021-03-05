@@ -7,7 +7,7 @@ import { Beer } from '../beer.model';
   styleUrls: ['./beer.component.css']
 })
 export class BeerComponent implements OnInit {
-  //@Input() public beer: Beer;
+  @Input() public beer!: Beer;
   constructor() { }
 
   ngOnInit(): void {
