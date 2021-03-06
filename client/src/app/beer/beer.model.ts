@@ -1,7 +1,10 @@
+import { Review } from "./review.model";
+
 interface BeerJson {
     name: string;
     abv: number;
     country: string;
+    reviews: string[];
 }
 
 export class Beer {
@@ -9,7 +12,7 @@ export class Beer {
         private _name: string,
         private _abv: number,
         private _country: string,
-        //reviews: Review[]
+        private _reviews: Review[]
     ) {}
 
     get name(): string {
@@ -24,12 +27,16 @@ export class Beer {
         return this._country
     }
 
-    addReview() {
+    get reviews(): Review[] {
+        return this._reviews;
+    }
+
+    addReview(review: Review) {
 
     }
 
     static fromJSON(json: BeerJson): Beer {
-        const beer = new Beer(json.name, json.abv, json.country)
+        const beer = new Beer(json.name, json.abv, json.country, []);
         return beer;
     }
 

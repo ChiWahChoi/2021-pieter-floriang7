@@ -4,4 +4,7 @@
 <p>{{ beer.abv }}</p>
 <p>{{ beer.country }}</p>
 
-<app-review></app-review>
+
+<div *ngFor="let review of beer.reviews">
+    <app-review [review]="review"></app-review>
+</div>
