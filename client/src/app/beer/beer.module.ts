@@ -4,6 +4,7 @@ import { BeerComponent } from './beer/beer.component';
 import { ReviewComponent } from './review/review.component'
 import { MaterialModule } from './../material/material.module';
 import { BeerListComponent } from './beer-list/beer-list.component';
+import { AddReviewComponent } from './add-review/add-review.component';
 
 
 
@@ -11,7 +12,8 @@ import { BeerListComponent } from './beer-list/beer-list.component';
   declarations: [
     BeerComponent,
     ReviewComponent,
-    BeerListComponent
+    BeerListComponent,
+    AddReviewComponent
   ],
   imports: [
     CommonModule,

@@ -1,10 +1,13 @@
-<p>Beer</p>
 
-<p>{{ beer.name }}</p>
-<p>{{ beer.abv }}</p>
-<p>{{ beer.country }}</p>
+<p>Name: {{ beer.name }}</p>
+<p>Abv (%): {{ beer.abv }}</p>
+<p>Country: {{ beer.country }}</p>
 
-
+<p>Reviews:</p>
 <div *ngFor="let review of beer.reviews">
     <app-review [review]="review"></app-review>
+</div>
+
+<div>
+    <app-add-review (newReview)="addNewReview($event)"></app-add-review>
 </div>
