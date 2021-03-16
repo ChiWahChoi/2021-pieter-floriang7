@@ -11,8 +11,8 @@ namespace Api.Models
         bool TryGetBeer(int id, out Beer beer);
         IEnumerable<Beer> GetAll();
         IEnumerable<Beer> GetBy(string name = null, string country = null, string abv = null);
-        void Add(Review review);
-        void Delete(Review review);
+        void Add(int id, Review review);
+        void Delete(int id, Review review);
         void Update(Review review);
         void SaveChanges();
     }

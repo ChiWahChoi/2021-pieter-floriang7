@@ -18,44 +18,52 @@ namespace Api.Data.Repositories
             _beers = _context.Beers;
         }
 
-        public void Add(Review review)
+        public void Add(int id, Review review)
         {
-            throw new NotImplementedException();
+            _beers.Include(b => b.Reviews).SingleOrDefault(b => b.Id == id).Reviews.Add(review);
         }
 
-        public void Delete(Review review)
+        public void Delete(int id, Review review)
         {
-            throw new NotImplementedException();
+            _beers.Include(b => b.Reviews).SingleOrDefault(b => b.Id == id).Reviews.Remove(review);
         }
 
         public IEnumerable<Beer> GetAll()
         {
-            throw new NotImplementedException();
+            return _beers.Include(b => b.Reviews).ToList();
         }
 
         public Beer GetBy(int id)
         {
-            throw new NotImplementedException();
+            return _beers.Include(b => b.Reviews).SingleOrDefault(b => b.Id == id);
         }
 
         public IEnumerable<Beer> GetBy(string name = null, string country = null, string abv = null)
         {
-            throw new NotImplementedException();
+            var beers = _beers.Include(b => b.Reviews).AsQueryable();
+            if (!string.IsNullOrEmpty(name))
+                beers = beers.Where(b => b.Name.IndexOf(name) >= 0);
+            if (!string.IsNullOrEmpty(country))
+                beers = beers.Where(b => b.Country == country);
+            if (!string.IsNullOrEmpty(abv))
+                beers = beers.Where(b => b.Abv.ToString().Equals(abv));
+            return beers.OrderBy(b => b.Name).ToList();
         }
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
         }
 
         public bool TryGetBeer(int id, out Beer beer)
         {
-            throw new NotImplementedException();
+            beer = _context.Beers.Include(b => b.Reviews).FirstOrDefault(b => b.Id == id);
+            return beer != null;
         }
 
         public void Update(Review review)
         {
-            throw new NotImplementedException();
+            _context.Update(review);
         }
     }
 }

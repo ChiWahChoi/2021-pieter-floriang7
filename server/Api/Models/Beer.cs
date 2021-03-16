@@ -35,6 +35,8 @@ namespace Api.Models
         #region Methods
         public void AddReview(Review review) => Reviews.Add(review);
 
+        public void DeleteReview(Review review) => Reviews.Remove(review);
+
         public Review GetReview(int id) => Reviews.SingleOrDefault(i => i.Id == id);
         #endregion
 

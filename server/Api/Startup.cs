@@ -40,9 +40,9 @@ namespace Api
             services.AddOpenApiDocument(c =>
             {
                 c.DocumentName = "apidocs";
-                c.Title = "Recipe API";
+                c.Title = "Beer API";
                 c.Version = "v1";
-                c.Description = "The Recipe API documentation description.";
+                c.Description = "The Beer API documentation description.";
             });
 
             services.AddCors(options => options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin()));
