@@ -30,7 +30,8 @@ namespace Api.Data.Repositories
 
         public IEnumerable<Beer> GetAll()
         {
-            return _beers.Include(b => b.Reviews).ToList();
+            //return _beers.Include(b => b.Reviews).ToList();
+            return _beers.ToList();
         }
 
         public Beer GetBy(int id)

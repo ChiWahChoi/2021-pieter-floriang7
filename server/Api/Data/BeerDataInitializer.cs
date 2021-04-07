@@ -17,11 +17,11 @@ namespace Api.Data
 
         public void InitializeData()
         {
-            _dbContext.Database.EnsureDeleted();
+            /*_dbContext.Database.EnsureDeleted();
             if (_dbContext.Database.EnsureCreated())
             {
                 //seeding the database with Beers, see DBContext               
-            }
+            }*/
         }
 
     }

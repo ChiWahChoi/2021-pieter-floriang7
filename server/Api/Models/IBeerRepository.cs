@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Api.Models
 {
-    interface IBeerRepository
+    public interface IBeerRepository
     {
         Beer GetBy(int id);
         bool TryGetBeer(int id, out Beer beer);

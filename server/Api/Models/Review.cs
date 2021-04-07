@@ -17,7 +17,11 @@ namespace Api.Models
         public DateTime DateAdded { get; set; }
         #endregion
 
-        #region Constructor     
+        #region Constructors    
+        public Review()
+        {
+            DateAdded = DateTime.Now;
+        }
         public Review(int rating, string description)
         {
             Rating = rating;

@@ -16,6 +16,8 @@ namespace Api.Models
 
         public string Country { get; set; }
 
+        public string Image_url { get; set; }
+
         public ICollection<Review> Reviews { get; private set; }
         #endregion
 
