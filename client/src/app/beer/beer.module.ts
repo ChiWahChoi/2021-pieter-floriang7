@@ -5,6 +5,8 @@ import { ReviewComponent } from './review/review.component'
 import { MaterialModule } from './../material/material.module';
 import { BeerListComponent } from './beer-list/beer-list.component';
 import { AddReviewComponent } from './add-review/add-review.component';
+import { HttpClientModule } from '@angular/common/http';
+import { BeerFilterPipe } from './beer-filter.pipe';
 
 
 
@@ -13,10 +15,12 @@ import { AddReviewComponent } from './add-review/add-review.component';
     BeerComponent,
     ReviewComponent,
     BeerListComponent,
-    AddReviewComponent
+    AddReviewComponent,
+    BeerFilterPipe
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     MaterialModule
   ],
   exports: [
