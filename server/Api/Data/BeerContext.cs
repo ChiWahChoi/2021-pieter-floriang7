@@ -32,7 +32,7 @@ namespace Api.Data
                 .HasMany(p => p.Reviews)
                 .WithOne()
                 .IsRequired()
-                .HasForeignKey("BeerId"); //shadow property
+                .HasForeignKey("BeerId");
 
             builder.Entity<Beer>().Property(p => p.Id).HasColumnName("BeerId");
             builder.Entity<Beer>().Property(p => p.Name).HasMaxLength(255).IsRequired();
@@ -40,10 +40,14 @@ namespace Api.Data
             builder.Entity<Beer>().Property(p => p.Country).HasMaxLength(255).IsRequired();
             builder.Entity<Beer>().Property(p => p.Image_url).HasMaxLength(255).IsRequired();
 
-            
+
             // REVIEW
+            builder.Entity<Review>()
+                .ToTable("Reviews");
+
+            builder.Entity<Review>().Property(r => r.Id).HasColumnName("ReviewId");
             builder.Entity<Review>().Property(p => p.Rating).IsRequired();
-            builder.Entity<Review>().Property(p => p.Description).IsRequired().HasMaxLength(200);
+            builder.Entity<Review>().Property(p => p.Description).HasMaxLength(255);
 
 
             //seeding database
