@@ -1,17 +1,32 @@
 import { Injectable } from '@angular/core';
-import { BEERS } from './beer-mock/mock-beers';
 import { Review } from './review.model';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { map, tap } from 'rxjs/operators';
+import { Beer } from './beer.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BeerDataService {
-  private _beers = BEERS;
-  
-  constructor() { }
 
-  get beers() {
-    return this._beers;
+  
+  constructor(private http: HttpClient) { }
+
+  get beers$(): Observable<Beer[]> {
+    return this.http.get(`${environment.apiUrl}/beers/`).pipe(
+      tap(console.log),
+      map(
+        (list: any[]): Beer[] => list.map(Beer.fromJSON))
+    );
+  }
+
+  getBeers$(id: string): Observable<Beer[]> {
+      return this.http.get(`${environment.apiUrl}/beers/${id}`).pipe
+      (tap(console.log), 
+      map((list: any[]): Beer[] => list.map(Beer.fromJSON))
+      );
   }
 
 

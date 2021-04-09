@@ -1,4 +1,4 @@
-interface ReviewJson {
+export interface ReviewJson {
     rating: number;
     description: string;
     dateAdded: string;
@@ -27,6 +27,10 @@ export class Review {
     static fromJSON(json: ReviewJson): Review {
         const review = new Review(json.rating, json.description, new Date(json.dateAdded));
         return review;
+    }
+
+    toJSON(): ReviewJson {
+        return { rating: this.rating, description: this.description, dateAdded: this.dateAdded.toDateString() };
     }
 
 }
