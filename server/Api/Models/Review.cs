@@ -11,8 +11,8 @@ namespace Api.Models
         #region Properties
         public int Id { get; set; }
         [Required]
+        [Range(0, 10)]
         public int Rating { get; set; }
-        [Required]
         public string Description { get; set; }
         public DateTime DateAdded { get; set; }
         #endregion
