@@ -1,11 +1,37 @@
 <h4>Add Review</h4>
 
 <!--<mat-card>-->   
+<form [formGroup]="review" (ngSubmit)="onSubmit()"> 
 <!--    <mat-form-field> -->
-        <input matInput placeholder="score" type="text"
-        #newreviewscore/>
+        <input 
+            matInput 
+            aria-label="rating" 
+            type="text"
+            formControlName="rating"
+            required
+            #spy
+        />
+        <mat-error *ngIf="review.get('rating')['errors'] && review.get('rating').touched">
+            {{ getErrorMessage(review.get('rating')['errors']) }}
+        </mat-error>
 <!--    </mat-form-field>-->
-    <button (click)="addReview(newreviewscore)" mat-raised-button>
-        add review
+<!--    <mat-form-field> -->
+    <input 
+    matInput 
+    aria-label="description" 
+    type="text"
+    formControlName="description"
+/>
+<mat-error *ngIf="review.get('description')['errors'] && review.get('description').touched">
+    {{ getErrorMessage(review.get('description')['errors']) }}
+</mat-error>
+<!--    </mat-form-field>-->
+    <button type="submit" mat-raised-button [disabled]="!review.valid">
+        Add 
     </button>
 <!--</mat-card>-->
+</form>
+REMOVE {{review.value | json}}
+{{ spy.className}}
+REMOVE {{ review.get('rating')['errors'] | json }}
+

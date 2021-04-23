@@ -7,7 +7,7 @@ import { BeerListComponent } from './beer-list/beer-list.component';
 import { AddReviewComponent } from './add-review/add-review.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BeerFilterPipe } from './beer-filter.pipe';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +21,8 @@ import { BeerFilterPipe } from './beer-filter.pipe';
   imports: [
     CommonModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
   exports: [
     BeerListComponent
