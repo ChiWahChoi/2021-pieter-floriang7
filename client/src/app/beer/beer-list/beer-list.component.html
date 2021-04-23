@@ -1,6 +1,7 @@
 <div>
-    <input (keyup)="filterBeer$.next($event.target.value)" type="text" placeholder="name" >
+    <input (keyup)="filterBeer$.next($event.target.value)" type="text" placeholder="name" data-cy="filterInput" >
+
     <div *ngFor="let localBeer of (beers$ | async | beerFilter: filterBeerName)">
-        <app-beer [beer]="localBeer"></app-beer>
+        <app-beer [beer]="localBeer" data-cy="beerCard"></app-beer>
     </div>
 </div>

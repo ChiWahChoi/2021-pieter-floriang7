@@ -1,0 +1,59 @@
+[
+    {
+        "id":1,
+        "name":"Mad Jack Mixer",
+        "abv":5,
+        "country":"Canada",
+        "image_url":"http://www.thebeerstore.ca/sites/default/files/styles/brand_hero/public/sbs/brand/18636-MJ-Family-Can-TBS-322x344.jpg?itok=v_mQRmR1",
+        "reviews":[
+            {
+                "id":6,
+                "rating":10,
+                "description":"this is a description",
+                "dateAdded":"2021-04-09T17:02:00.327"
+            },
+            {
+                "id":7,
+                "rating":10,
+                "description":"this is a description",
+                "dateAdded":"2021-04-09T17:02:48.73"
+            },
+            {
+                "id":8,
+                "rating":7,
+                "description":"The taste of this beer was ok",
+                "dateAdded":"2021-04-23T11:00:27.24"
+            }
+            ]
+    },
+    {
+        "id":2,
+        "name":"Mad Jack Hard Root Beer",
+        "abv":5,
+        "country":"Canada",
+        "image_url":"http://www.thebeerstore.ca/sites/default/files/styles/brand_hero/public/sbs/brand/18636-MJ-Rootbeer-Can-TBS-322x344.jpg?itok=0QzZqG0m",
+        "reviews":[
+            {
+                "id":3,
+                "rating":5,
+                "description":"This is the description of rating 3",
+                "dateAdded":"2021-04-09T16:50:02.007"
+            }
+        ]
+    },
+    {
+        "id":3,
+        "name":"Keystone Ice",
+        "abv":5.5,
+        "country":"Canada",
+        "image_url":"http://www.thebeerstore.ca/sites/default/files/styles/brand_hero/public/brand/hero/Key_ICE_355mL.jpg?itok=UDkvF6Rl",
+        "reviews":[
+            {
+                "id":4,
+                "rating":8,
+                "description":"This is the description of rating 4",
+                "dateAdded":"2021-04-09T16:50:02.007"
+            }
+        ]
+    }
+]

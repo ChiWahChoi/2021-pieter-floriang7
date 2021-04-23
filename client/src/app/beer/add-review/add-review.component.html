@@ -8,25 +8,27 @@
             aria-label="rating" 
             type="text"
             formControlName="rating"
+            data-cy="ratingInput"
             required
             #spy
         />
-        <mat-error *ngIf="review.get('rating')['errors'] && review.get('rating').touched">
+        <mat-error data-cy="ratingError" *ngIf="review.get('rating')['errors'] && review.get('rating').touched">
             {{ getErrorMessage(review.get('rating')['errors']) }}
         </mat-error>
 <!--    </mat-form-field>-->
 <!--    <mat-form-field> -->
-    <input 
-    matInput 
-    aria-label="description" 
-    type="text"
-    formControlName="description"
-/>
-<mat-error *ngIf="review.get('description')['errors'] && review.get('description').touched">
-    {{ getErrorMessage(review.get('description')['errors']) }}
-</mat-error>
+        <input 
+            matInput 
+            aria-label="description" 
+            type="text"
+            formControlName="description"
+            data-cy="descriptionInput"
+        />
+        <mat-error *ngIf="review.get('description')['errors'] && review.get('description').touched">
+            {{ getErrorMessage(review.get('description')['errors']) }}
+        </mat-error>
 <!--    </mat-form-field>-->
-    <button type="submit" mat-raised-button [disabled]="!review.valid">
+    <button type="submit" mat-raised-button [disabled]="!review.valid" data-cy="addReviewButton">
         Add 
     </button>
 <!--</mat-card>-->
