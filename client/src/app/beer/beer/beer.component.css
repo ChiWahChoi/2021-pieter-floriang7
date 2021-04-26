@@ -1,0 +1,12 @@
+mat-card {
+    max-width: 40rem;
+    margin: 1rem;
+}
+
+div.img-container {
+    width: 10rem;
+}
+
+div.img-container img {
+    width: 100%;
+}

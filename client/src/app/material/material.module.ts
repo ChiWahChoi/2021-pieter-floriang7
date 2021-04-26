@@ -5,6 +5,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -15,14 +17,18 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule,
     MatListModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatListModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatProgressSpinnerModule
   ]
 })
 export class MaterialModule { }
