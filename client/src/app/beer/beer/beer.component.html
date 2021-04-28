@@ -1,15 +1,16 @@
 <mat-card>
     <mat-card-content>
         <div class="d-flex flex-row">
-            <div class="img-container">
+            <div class="img-container pe-3">
                 <img src="{{beer.image_url}}"/>
             </div>       
             <div>
-                <p>Name:<br>{{ beer.name }}</p>
-                <p>Abv (%):<br>{{ beer.abv }}</p>
-                <p>Country:<br>{{ beer.country }}</p>
-                <p>Reviews:</p>
-                <div *ngFor="let review of beer.reviews">
+                <p><span class="fw-bold">Name</span><br>{{ beer.name }}</p>
+                <p><span class="fw-bold">Abv (%)</span><br>{{ beer.abv }}</p>
+                <p><span class="fw-bold">Country</span><br>{{ beer.country }}</p>
+                <p><span class="fw-bold">Rating</span><br><span *ngIf="averageRating != 0">{{ averageRating }}</span> <span *ngIf="beer.reviews.length == 0">No rating</span> </p>
+                <p><span class="fw-bold">Reviews</span></p>
+                <div *ngFor="let review of beer.reviews" class="my-3">
                     <app-review [review]="review"></app-review>
                 </div>
             </div>

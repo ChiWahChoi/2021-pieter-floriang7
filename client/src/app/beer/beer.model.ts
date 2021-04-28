@@ -48,7 +48,7 @@ export class Beer {
     }
 
     static fromJSON(json: BeerJson): Beer {
-        const beer = new Beer(json.name, json.abv, json.country, json.image_url, []);
+        const beer = new Beer(json.name, json.abv, json.country, json.image_url, json.reviews.map(Review.fromJSON));
         beer._id = json.id
         return beer;
     }
