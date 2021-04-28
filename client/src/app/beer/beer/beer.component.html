@@ -9,10 +9,13 @@
                 <p><span class="fw-bold">Abv (%)</span><br>{{ beer.abv }}</p>
                 <p><span class="fw-bold">Country</span><br>{{ beer.country }}</p>
                 <p><span class="fw-bold">Rating</span><br><span *ngIf="averageRating != 0">{{ averageRating }}</span> <span *ngIf="beer.reviews.length == 0">No rating</span> </p>
-                <p><span class="fw-bold">Reviews</span></p>
+                <a [routerLink]="['detail', beer.id]"><span class="fw-bold">Details</span></a> 
+                
+                
+                <!--<p><span class="fw-bold">Reviews</span></p>
                 <div *ngFor="let review of beer.reviews" class="my-3">
                     <app-review [review]="review"></app-review>
-                </div>
+                </div>-->
             </div>
         </div>
         <!--<div>

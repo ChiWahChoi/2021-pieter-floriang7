@@ -14,7 +14,7 @@ import { BeerResolver } from './BeerResolver';
 
 const routes: Routes = [
   { path: 'beer/list', component: BeerListComponent },
-  { path: 'beer/detail/:id', component: BeerDetailComponent, resolve: {beer: BeerResolver}}
+  { path: 'beer/list/detail/:id', component: BeerDetailComponent, resolve: {beer: BeerResolver}}
 ];
 
 @NgModule({

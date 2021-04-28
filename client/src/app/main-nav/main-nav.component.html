@@ -8,8 +8,8 @@
       <a mat-list-item [routerLink]="['beer/list']">Beers</a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
+  <mat-sidenav-content class="sidenav-content">
+    <mat-toolbar>
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -18,7 +18,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>The Beer Review</span>
+      <span class="text-uppercase fw-bold fs-3 text-white">The Beer Review</span>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
