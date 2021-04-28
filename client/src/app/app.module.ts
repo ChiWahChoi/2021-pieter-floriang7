@@ -24,16 +24,16 @@ import { AppRoutingModule } from './app-routing.module';
     MainNavComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule, 
     BeerModule,
+    AppRoutingModule,
     MaterialModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule,
-    AppRoutingModule
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

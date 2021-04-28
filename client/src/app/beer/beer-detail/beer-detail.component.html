@@ -1,0 +1,21 @@
+<mat-card>
+    <mat-card-content>
+        <div class="d-flex flex-row">
+            <div class="img-container pe-3">
+                <img src="{{beer.image_url}}"/>
+            </div>       
+            <div>
+                <p><span class="fw-bold">Name</span><br>{{ beer.name }}</p>
+                <p><span class="fw-bold">Abv (%)</span><br>{{ beer.abv }}</p>
+                <p><span class="fw-bold">Country</span><br>{{ beer.country }}</p>
+                <p><span class="fw-bold">Reviews</span></p>
+                <div *ngFor="let review of beer.reviews" class="my-3">
+                    <app-review [review]="review"></app-review>
+                </div>
+            </div>
+        </div>
+        <!--<div>
+            <app-add-review (newReview)="addNewReview($event)"></app-add-review>
+        </div>-->
+    </mat-card-content>
+</mat-card>

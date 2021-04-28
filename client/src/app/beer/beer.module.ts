@@ -8,7 +8,14 @@ import { AddReviewComponent } from './add-review/add-review.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BeerFilterPipe } from './beer-filter.pipe';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BeerDetailComponent } from './beer-detail/beer-detail.component';
+import { RouterModule, Routes } from '@angular/router';
+import { BeerResolver } from './BeerResolver';
 
+const routes: Routes = [
+  { path: 'beer/list', component: BeerListComponent },
+  { path: 'beer/detail/:id', component: BeerDetailComponent, resolve: {beer: BeerResolver}}
+];
 
 @NgModule({
   declarations: [
@@ -16,13 +23,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReviewComponent,
     BeerListComponent,
     AddReviewComponent,
-    BeerFilterPipe
+    BeerFilterPipe,
+    BeerDetailComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forChild(routes)
   ],
   exports: [
     BeerListComponent,

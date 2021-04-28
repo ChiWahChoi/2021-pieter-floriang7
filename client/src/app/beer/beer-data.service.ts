@@ -23,11 +23,10 @@ export class BeerDataService {
     );
   }
 
-  getBeers$(id: string): Observable<Beer[]> {
-      return this.http.get(`${environment.apiUrl}/beers/${id}`).pipe
-      (tap(console.log), 
-      map((list: any[]): Beer[] => list.map(Beer.fromJSON))
-      );
+  getBeer$(id: string): Observable<Beer> {
+    return this.http
+      .get(`${environment.apiUrl}/beers/${id}`)
+      .pipe(tap(console.log),catchError(this.handleError), map(Beer.fromJSON)); 
   }
 
   /*addNewReview(beer: Beer, review: Review) {
@@ -38,12 +37,14 @@ export class BeerDataService {
  
   handleError(err: any): Observable<never> {
     let errorMessage: string;
-    if (err instanceof HttpErrorResponse) {
+    if (err.error instanceof ErrorEvent) {
+      errorMessage = `An error occurred: ${err.error.message}`;
+    } else if (err instanceof HttpErrorResponse) {
+      console.log(err);
       errorMessage = `'${err.status} ${err.statusText}' when accessing '${err.url}'`;
     } else {
-      errorMessage = `an unknown error occurred ${err}`;
+      errorMessage = err;
     }
-    console.error(err);
     return throwError(errorMessage);
   }
 
