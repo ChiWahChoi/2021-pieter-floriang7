@@ -1,29 +1,31 @@
-<div>
-    <mat-card> ERROR WITH FILTER
-        <!--<mat-form-field> ERROR WITH $event.target.value
-        <input
-            matInput
-            (keyup)="filterBeer$.next($event.target.value)"
-            placeholder="filter"
-            type="text"
-            data-cy="filterInput"
-            [value]="filterBeerName"
-        />
-        </mat-form-field>-->
-    </mat-card>
+<div class="container">
+    <h1 class="my-5">Beers</h1>
+    <div>
+        <mat-card> ERROR WITH FILTER
+            <!--<mat-form-field> ERROR WITH $event.target.value
+            <input
+                matInput
+                (keyup)="filterBeer$.next($event.target.value)"
+                placeholder="filter"
+                type="text"
+                data-cy="filterInput"
+                [value]="filterBeerName"
+            />
+            </mat-form-field>-->
+        </mat-card>
 
-    <div *ngIf="beers as beers; else loadingOrError" class="d-flex flex-wrap"> 
-            <!--<div *ngFor="let localBeer of (beers$ | async | beerFilter: filterBeerName)">-->
-            <div *ngFor="let localBeer of (beers | beerFilter: filterBeerName)">
-                <app-beer [beer]="localBeer" data-cy="beerCard"></app-beer>
-            </div>
-    </div>  
-    <ng-template #loadingOrError>
-        <span *ngIf="errorMessage; else loading">Error loading the recipe list: {{ errorMessage }}. <br/>
-            Please try again later.</span>
-        <ng-template #loading>
-          <mat-spinner></mat-spinner>
+        <div *ngIf="beers as beers; else loadingOrError" class="d-flex flex-wrap"> 
+                <!--<div *ngFor="let localBeer of (beers$ | async | beerFilter: filterBeerName)">-->
+                <div *ngFor="let localBeer of (beers | beerFilter: filterBeerName)">
+                    <app-beer [beer]="localBeer" data-cy="beerCard"></app-beer>
+                </div>
+        </div>  
+        <ng-template #loadingOrError>
+            <span *ngIf="errorMessage; else loading">Error loading the recipe list: {{ errorMessage }}. <br/>
+                Please try again later.</span>
+            <ng-template #loading>
+            <mat-spinner></mat-spinner>
+            </ng-template>
         </ng-template>
-    </ng-template>
+    </div>
 </div>
- 

@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { BeerDataService } from '../beer-data.service';
 import { Review } from '../review.model';
 
 @Component({
@@ -11,7 +12,7 @@ import { Review } from '../review.model';
 export class AddReviewComponent implements OnInit {
   @Output() public newReview = new EventEmitter<Review>();
   public review!: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private _beerDataService: BeerDataService) { }
 
   /*addReview(reviewScore: HTMLInputElement): boolean {
     const review = new Review(Number.parseInt(reviewScore.value), "lorem ipsum lorem ipsum lorem ipsum", new Date())
@@ -20,7 +21,8 @@ export class AddReviewComponent implements OnInit {
   }*/
 
   onSubmit() {
-    this.newReview.emit(new Review(this.review.value.rating, "", new Date()));
+    this.newReview.emit(new Review(this.review.value.rating, this.review.value.description, new Date()));
+    //this._beerDataService.addnewReview(new Review(this.review.value.rating, this.review.value.description, new Date()));
   }
 
   getErrorMessage(errors: any): string {

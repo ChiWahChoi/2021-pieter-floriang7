@@ -25,7 +25,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   exports: [
-    BeerListComponent
+    BeerListComponent,
+    AddReviewComponent
   ]
 })
 export class BeerModule { }
