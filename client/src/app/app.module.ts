@@ -14,12 +14,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { AppRoutingModule } from './app-routing.module';
 
-const appRoutes: Routes = [
-  { path: 'beer/list', component: BeerListComponent },
-  { path: '', redirectTo: 'beer/list', pathMatch: 'full'},
-  { path: '**', component: PageNotFoundComponent}
-];
 
 @NgModule({
   declarations: [
@@ -31,13 +27,13 @@ const appRoutes: Routes = [
     BrowserModule,
     BeerModule,
     MaterialModule,
-    RouterModule.forRoot(appRoutes),
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
