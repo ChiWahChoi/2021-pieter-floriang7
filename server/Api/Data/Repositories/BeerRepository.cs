@@ -30,17 +30,17 @@ namespace Api.Data.Repositories
 
         public IEnumerable<Beer> GetAll()
         {
-            return _beers.Include(b => b.Reviews).ToList();
+            return _beers.AsNoTracking().Include(b => b.Reviews).ToList();
         }
 
         public Beer GetBy(int id)
         {
-            return _beers.Include(b => b.Reviews).SingleOrDefault(b => b.Id == id);
+            return _beers.AsNoTracking().Include(b => b.Reviews).SingleOrDefault(b => b.Id == id);
         }
 
         public IEnumerable<Beer> GetBy(string name = null, string country = null, string abv = null)
         {
-            var beers = _beers.Include(b => b.Reviews).AsQueryable();
+            var beers = _beers.AsNoTracking().Include(b => b.Reviews).AsQueryable();
             if (!string.IsNullOrEmpty(name))
                 beers = beers.Where(b => b.Name.IndexOf(name) >= 0);
             if (!string.IsNullOrEmpty(country))
