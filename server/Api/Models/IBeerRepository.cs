@@ -15,5 +15,6 @@ namespace Api.Models
         void Delete(int id, Review review);
         void Update(Review review);
         void SaveChanges();
+        void Update(Beer beer);
     }
 }

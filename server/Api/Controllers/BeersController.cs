@@ -63,8 +63,9 @@ namespace Api.Controllers
         /// <param name="review">review to be added</param>
         /// <returns></returns>
         [HttpPost("{id}/reviews")]
-        public ActionResult<Beer> PostReview(int id, Review review)
+        public ActionResult<Review> PostReview(int id, Review review)
         {
+            Console.WriteLine("PostReview Called");
             if(!_beerRepository.TryGetBeer(id, out var beer))
             {
                 return NotFound();
@@ -72,8 +73,9 @@ namespace Api.Controllers
 
             var reviewToCreate = new Review(review.Rating, review.Description);
             beer.AddReview(reviewToCreate);
+            _beerRepository.Update(beer);
             _beerRepository.SaveChanges();
-            return CreatedAtAction("GetReview", new { id = beer.Id, reviewId = reviewToCreate.Id }, reviewToCreate);
+            return CreatedAtAction(nameof(GetReview), new { id = beer.Id, reviewId = reviewToCreate.Id }, reviewToCreate);
         }
 
         /// <summary>
@@ -126,6 +128,25 @@ namespace Api.Controllers
             _beerRepository.SaveChanges();
             return NoContent();
         }
+
+        /// <summary>
+        /// GET returns a review by id
+        /// </summary>
+        /// <param name="id">id of a beer</param>
+        /// <param name="reviewId"> id of a review</param>
+        /// <returns></returns>
+        [HttpGet("{id}/reviews/{reviewId}")]
+        public ActionResult<Review> GetReview(int id, int reviewId)
+        {
+            if (!_beerRepository.TryGetBeer(id, out var beer))
+            {
+                return NotFound();
+            }
+            Review review = beer.GetReview(reviewId);
+            return review;
+        }
+
+
         #endregion
 
     }

@@ -61,6 +61,11 @@ namespace Api.Data.Repositories
             return beer != null;
         }
 
+        public void Update(Beer beer)
+        {
+            _context.Update(beer);
+        }
+
         public void Update(Review review)
         {
             _context.Update(review);
