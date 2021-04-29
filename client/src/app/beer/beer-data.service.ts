@@ -10,9 +10,13 @@ import { Observable, of, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class BeerDataService {
-
+  private _beers: Beer[] = [];
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.beers$.subscribe((beers: Beer[]) => {
+      this._beers = beers;
+    });
+  }
 
   get beers$(): Observable<Beer[]> {
     return this.http.get(`${environment.apiUrl}/beers/`).pipe(
@@ -29,11 +33,11 @@ export class BeerDataService {
       .pipe(tap(console.log),catchError(this.handleError), map(Beer.fromJSON)); 
   }
 
-  /*addNewReview(beer: Beer, review: Review) {
+  addNewReview(beer: Beer, review: Review) {
     return this.http.post(`${environment.apiUrl}/beers/${beer.id}/reviews/`, review.toJSON())
-    .pipe(catchError(this.handleError),map(Review.fromJSON))
+    .pipe(tap(console.log), catchError(this.handleError), map(Review.fromJSON))
     .subscribe();
-  }*/
+  }
  
   handleError(err: any): Observable<never> {
     let errorMessage: string;

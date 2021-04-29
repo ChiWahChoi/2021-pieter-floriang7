@@ -28,12 +28,6 @@ import { AppRoutingModule } from './app-routing.module';
     BeerModule,
     AppRoutingModule,
     MaterialModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

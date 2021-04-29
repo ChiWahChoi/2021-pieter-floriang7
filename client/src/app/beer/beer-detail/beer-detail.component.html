@@ -14,8 +14,9 @@
                 </div>
             </div>
         </div>
-        <!--<div>
-            <app-add-review (newReview)="addNewReview($event)"></app-add-review>
-        </div>-->
+        <div>
+            <!--<app-add-review [beer]="beer" (newReview)="addNewReview($event)"></app-add-review>-->
+            <app-add-review [beer]="beer"></app-add-review>
+        </div>
     </mat-card-content>
 </mat-card>
