@@ -65,7 +65,6 @@ namespace Api.Controllers
         [HttpPost("{id}/reviews")]
         public ActionResult<Review> PostReview(int id, Review review)
         {
-            Console.WriteLine("PostReview Called");
             if(!_beerRepository.TryGetBeer(id, out var beer))
             {
                 return NotFound();

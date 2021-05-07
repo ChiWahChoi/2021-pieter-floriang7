@@ -1,20 +1,22 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Security.Claims;
+using System.Text;
 using Api.Data;
 using Api.Data.Repositories;
 using Api.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
+using Microsoft.IdentityModel.Tokens;
+using NSwag;
+using NSwag.Generation.Processors.Security;
+using RecipeApi.Data.Repositories;
+using RecipeApi.Models;
 
 namespace Api
 {
@@ -36,6 +38,7 @@ namespace Api
 
             services.AddScoped<BeerDataInitializer>();
             services.AddScoped<IBeerRepository, BeerRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
 
             services.AddOpenApiDocument(c =>
             {
@@ -43,9 +46,51 @@ namespace Api
                 c.Title = "Beer API";
                 c.Version = "v1";
                 c.Description = "The Beer API documentation description.";
+                c.AddSecurity("JWT", new NSwag.OpenApiSecurityScheme
+                {
+                    Type = OpenApiSecuritySchemeType.ApiKey,
+                    In = OpenApiSecurityApiKeyLocation.Header,
+                    Name = "Authorization",
+                    Description = "Type into the textbox: Bearer {your JWT token}."
+                });
+                c.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
             });
 
             services.AddCors(options => options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin()));
+
+            services.AddIdentity<IdentityUser, IdentityRole>(cfg => cfg.User.RequireUniqueEmail = true).AddEntityFrameworkStores<BeerContext>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings.
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 1;
+
+                // Lockout settings.
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings.
+                options.User.AllowedUserNameCharacters =
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = true;
+            });
+
+            services.AddAuthentication(x => { 
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; 
+            }).AddJwtBearer(x => { 
+                x.SaveToken = true; x.TokenValidationParameters = new TokenValidationParameters { 
+                    ValidateIssuerSigningKey = true, IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"])),
+                    ValidateIssuer = false, ValidateAudience = false, RequireExpirationTime = true 
+                }; 
+            });
+
+            services.AddAuthorization(options => { options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role, "admin")); });
 
         }
 
@@ -64,6 +109,8 @@ namespace Api
             app.UseSwaggerUi3();
           
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

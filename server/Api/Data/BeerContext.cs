@@ -1,5 +1,7 @@
 ﻿using Api.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using RecipeApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Api.Data
 {
-    public class BeerContext : DbContext
+    public class BeerContext : IdentityDbContext
     {
         public BeerContext(DbContextOptions<BeerContext> options)
             : base(options)
@@ -50,6 +52,20 @@ namespace Api.Data
             builder.Entity<Review>().Property(p => p.Description).HasMaxLength(255);
 
 
+            // CUSTOMER
+            builder.Entity<Customer>().Property(c => c.LastName).IsRequired().HasMaxLength(50);
+            builder.Entity<Customer>().Property(c => c.FirstName).IsRequired().HasMaxLength(50);
+            builder.Entity<Customer>().Property(c => c.Email).IsRequired().HasMaxLength(100);
+            builder.Entity<Customer>().Ignore(c => c.FavoriteBeers);
+
+
+            // CUSTOMERFAVORITE
+            builder.Entity<CustomerFavorite>().HasKey(f => new { f.CustomerId, f.BeerId });
+            builder.Entity<CustomerFavorite>().HasOne(f => f.Customer).WithMany(u => u.Favorites).HasForeignKey(f => f.CustomerId);
+            builder.Entity<CustomerFavorite>().HasOne(f => f.Beer).WithMany().HasForeignKey(f => f.BeerId);
+
+
+
             //seeding database
             /*builder.Entity<Beer>().HasData(
                     new Beer { Id = 1, Name = "Stella", Abv = 4.5, Country = "Belgium"},
@@ -67,6 +83,6 @@ namespace Api.Data
         }
 
         public DbSet<Beer> Beers { get; set; }
-
+        public DbSet<Customer> Customers { get; set; }
     }
 }
