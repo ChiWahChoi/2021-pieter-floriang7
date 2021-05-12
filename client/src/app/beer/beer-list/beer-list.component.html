@@ -2,11 +2,12 @@
     <h1 class="my-5">Beers</h1>
     <div>
         <mat-card>
+            <h3>Filters</h3>
             <mat-form-field> 
             <input
                 matInput
                 (keyup)="filterBeer$.next($any($event.target).value)"
-                placeholder="filter"
+                placeholder="name"
                 type="text"
                 data-cy="filterInput"
                 [value]="filterBeerName"

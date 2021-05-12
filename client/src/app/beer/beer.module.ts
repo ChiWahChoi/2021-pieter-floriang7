@@ -14,8 +14,8 @@ import { BeerResolver } from './BeerResolver';
 import { AuthGuard } from '../user/auth.guard';
 
 const routes: Routes = [
-  { path: 'beer/list',/* canActivate: [AuthGuard],*/ component: BeerListComponent },
-  { path: 'beer/list/detail/:id', /*canActivate: [AuthGuard],*/ component: BeerDetailComponent, resolve: {beer: BeerResolver}}
+  { path: 'beer/list', canActivate: [AuthGuard], component: BeerListComponent },
+  { path: 'beer/list/detail/:id', canActivate: [AuthGuard], component: BeerDetailComponent, resolve: {beer: BeerResolver}}
 ];
 
 @NgModule({

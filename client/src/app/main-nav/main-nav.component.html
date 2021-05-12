@@ -22,7 +22,7 @@
 
 
       <span class="fill-space"></span>
-      <span *ngIf="loggedInUser$ | async as user; else loginTemplate">
+      <span class="text-white" *ngIf="loggedInUser$ | async as user; else loginTemplate">
         {{ user }}
         <button (click)="logout()" mat-flat-button>
           logout
