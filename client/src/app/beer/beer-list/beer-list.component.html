@@ -1,17 +1,17 @@
 <div class="container">
     <h1 class="my-5">Beers</h1>
     <div>
-        <mat-card> ERROR WITH FILTER
-            <!--<mat-form-field> ERROR WITH $event.target.value
-            <input
+        <mat-card> ERROR WITH FILTER ($event.target.value)
+            <mat-form-field> 
+            <!--<input
                 matInput
-                (keyup)="filterBeer$.next($event.target.value)"
+                (keyup)="filterBeer$.next(($event?.target as HTMLInputElement)?.value)"
                 placeholder="filter"
                 type="text"
                 data-cy="filterInput"
                 [value]="filterBeerName"
-            />
-            </mat-form-field>-->
+            />-->
+            </mat-form-field>
         </mat-card>
 
         <div *ngIf="beers as beers; else loadingOrError" class="d-flex flex-wrap"> 

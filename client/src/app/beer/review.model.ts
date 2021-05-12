@@ -30,7 +30,7 @@ export class Review {
     }
 
     toJSON(): ReviewJson {
-        return { rating: this.rating, description: this.description, dateAdded: this.dateAdded.toDateString() };
+        return { rating: this.rating, description: this.description, dateAdded: this.dateAdded.toISOString() };
     }
 
 }

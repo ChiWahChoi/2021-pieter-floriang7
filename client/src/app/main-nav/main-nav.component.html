@@ -19,6 +19,24 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span class="text-uppercase fw-bold fs-3 text-white">The Beer Review</span>
+
+
+      <span class="fill-space"></span>
+      <span *ngIf="loggedInUser$ | async as user; else loginTemplate">
+        {{ user }}
+        <button (click)="logout()" mat-flat-button>
+          logout
+        </button>
+      </span>
+      <ng-template #loginTemplate>
+        <span>
+          <button (click)="login()" mat-flat-button>
+            login
+          </button>
+        </span>
+      </ng-template>
+
+      
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>

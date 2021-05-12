@@ -11,10 +11,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BeerDetailComponent } from './beer-detail/beer-detail.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BeerResolver } from './BeerResolver';
+import { AuthGuard } from '../user/auth.guard';
 
 const routes: Routes = [
-  { path: 'beer/list', component: BeerListComponent },
-  { path: 'beer/list/detail/:id', component: BeerDetailComponent, resolve: {beer: BeerResolver}}
+  { path: 'beer/list',/* canActivate: [AuthGuard],*/ component: BeerListComponent },
+  { path: 'beer/list/detail/:id', /*canActivate: [AuthGuard],*/ component: BeerDetailComponent, resolve: {beer: BeerResolver}}
 ];
 
 @NgModule({

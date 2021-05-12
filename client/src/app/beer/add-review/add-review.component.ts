@@ -13,7 +13,7 @@ import { Review } from '../review.model';
 export class AddReviewComponent implements OnInit {
   @Input() public beer!: Beer;
   //@Output() public newReview = new EventEmitter<Review>();
-  public review!: FormGroup;
+  private _review: FormGroup = new FormGroup({});
   constructor(private fb: FormBuilder, private _beerDataService: BeerDataService) { }
 
   /*addReview(reviewScore: HTMLInputElement): boolean {
@@ -27,6 +27,10 @@ export class AddReviewComponent implements OnInit {
     this._beerDataService.addNewReview(this.beer, new Review(this.review.value.rating, this.review.value.description, new Date()));
   }
 
+  get review(): FormGroup {
+    return this._review;
+  }
+
   getErrorMessage(errors: any): string {
     if(errors.required) {
       return "is required";
@@ -37,7 +41,7 @@ export class AddReviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.review = this.fb.group({
+    this._review = this.fb.group({
       rating: ['', Validators.required],
       description: ['']
     },
