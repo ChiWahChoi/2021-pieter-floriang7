@@ -43,7 +43,7 @@ export class AddReviewComponent implements OnInit {
   ngOnInit(): void {
     this._review = this.fb.group({
       rating: ['', Validators.required],
-      description: ['']
+      description: ['', Validators.required]
     },
     {validator: validateRating}
     );

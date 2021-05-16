@@ -10,7 +10,7 @@
                 <p><span class="fw-bold">Country</span><br>{{ beer.country }}</p>
                 <p><span class="fw-bold">Reviews</span></p>
                 <div *ngFor="let review of beer.reviews" class="my-3">
-                    <app-review [review]="review"></app-review>
+                    <app-review [review]="review" [beer]="beer"></app-review>
                 </div>
             </div>
         </div>

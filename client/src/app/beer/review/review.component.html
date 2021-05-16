@@ -3,5 +3,6 @@
         <p>Rating: {{ review.rating }}</p>
         <p>Description: {{ review.description }}</p>
         <p>Date added: {{ review.dateAdded | date:"shortDate" }}</p>
+        <button (click)="deleteReview()" class="btn btn-danger">Delete</button>
     </mat-card-content>
 </mat-card>

@@ -4,13 +4,15 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Beer } from './beer.model';
-import { Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BeerDataService {
   private _beers: Beer[] = [];
+  private _reloadBeers$ = new BehaviorSubject<boolean>(true);
+
   
   constructor(private http: HttpClient) { 
     this.beers$.subscribe((beers: Beer[]) => {
@@ -36,7 +38,18 @@ export class BeerDataService {
   addNewReview(beer: Beer, review: Review) {
     return this.http.post(`${environment.apiUrl}/beers/${beer.id}/reviews/`, review.toJSON())
     .pipe(tap(console.log), catchError(this.handleError), map(Review.fromJSON))
-    .subscribe();
+    .subscribe(() => {
+      this._reloadBeers$.next(true);
+    });
+  }
+
+  deleteReview(beer: Beer, review: Review) {
+    return this.http
+      .delete(`${environment.apiUrl}/beers/${beer.id}/reviews/${review.id}`)
+      .pipe(tap(console.log), catchError(this.handleError))
+      .subscribe(() => {
+        this._reloadBeers$.next(true)
+      });
   }
  
   handleError(err: any): Observable<never> {
