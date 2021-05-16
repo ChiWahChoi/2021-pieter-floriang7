@@ -51,6 +51,17 @@ namespace Api.Controllers
             return beer;
         }
 
+        [HttpGet("toprated")]
+        public IEnumerable<Beer> GetTopRated()
+        {
+            foreach(Beer beer in _beerRepository.GetTopRated())
+            {
+                Console.WriteLine("name " + beer.Name + " - reviews " + beer.Reviews.Count);
+            }
+
+            return _beerRepository.GetTopRated();
+        }
+
         #endregion
 
 

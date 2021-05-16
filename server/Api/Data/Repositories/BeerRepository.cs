@@ -38,6 +38,11 @@ namespace Api.Data.Repositories
             return _beers.AsNoTracking().Include(b => b.Reviews).SingleOrDefault(b => b.Id == id);
         }
 
+        public IEnumerable<Beer> GetTopRated()
+        {
+            return _beers.Include(b => b.Reviews).Where(b => b.Reviews.Count != 0).OrderByDescending(b => b.Reviews.Average(r => r.Rating)).ToList();
+        }
+
         public IEnumerable<Beer> GetBy(string name = null, string country = null, string abv = null)
         {
             var beers = _beers.AsNoTracking().Include(b => b.Reviews).AsQueryable();
