@@ -12,7 +12,8 @@ namespace Api.Models
         public int Id { get; set; }
         [Required]
         [Range(0, 10)]
-        public int Rating { get; set; }
+        public double Rating { get; set; }
+        [Required]
         public string Description { get; set; }
         public DateTime DateAdded { get; set; }
         #endregion
@@ -22,7 +23,7 @@ namespace Api.Models
         {
             DateAdded = DateTime.Now;
         }
-        public Review(int rating, string description)
+        public Review(double rating, string description)
         {
             Rating = rating;
             Description = description;

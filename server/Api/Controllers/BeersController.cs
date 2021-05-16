@@ -1,4 +1,5 @@
-﻿using Api.Models;
+﻿using Api.DTOs;
+using Api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
-    //[ApiConventionType(typeof(DefaultApiConventions))]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
@@ -63,7 +64,7 @@ namespace Api.Controllers
         /// <param name="review">review to be added</param>
         /// <returns></returns>
         [HttpPost("{id}/reviews")]
-        public ActionResult<Review> PostReview(int id, Review review)
+        public ActionResult<Review> PostReview(int id, ReviewDTO review)
         {
             if(!_beerRepository.TryGetBeer(id, out var beer))
             {
@@ -81,7 +82,7 @@ namespace Api.Controllers
         /// DELETE deletes a review
         /// </summary>
         /// <param name="id">id of a beer</param>
-        /// <param name="reviewId">id of a review</param>
+        /// <param name="reviewId">id of the review that will be deleted</param>
         /// <returns></returns>
         [HttpDelete("{id}/reviews/{reviewId}")]
         public IActionResult DeleteReview(int id, int reviewId)
