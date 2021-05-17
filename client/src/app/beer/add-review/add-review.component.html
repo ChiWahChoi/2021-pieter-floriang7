@@ -12,12 +12,15 @@
                     type="text"
                     formControlName="rating"
                     data-cy="ratingInput"
-                    required
-                    #spy
+                    required                  
                 />
                 
                 <mat-error data-cy="ratingError" *ngIf="review?.get('rating')!['errors'] && review?.get('rating')!.touched">
-                    <p class="text-danger"> an error occurred</p>
+                    {{ getErrorMessage(review?.get('rating')!['errors']) }}
+                </mat-error>
+
+                <mat-error *ngIf="review['errors']">
+                    {{ getErrorMessage(review['errors']) }}
                 </mat-error>
 
             </mat-form-field>
@@ -29,11 +32,12 @@
                     type="text"
                     formControlName="description"
                     data-cy="descriptionInput"
+                    required
                 />
                 
                 <mat-error *ngIf="review?.get('description')!['errors'] && review?.get('description')!.touched">
                     {{ getErrorMessage(review?.get('description')!['errors']) }}
-                </mat-error>
+                </mat-error>  
             
             </mat-form-field>
             <button type="submit" mat-raised-button data-cy="addReviewButton">

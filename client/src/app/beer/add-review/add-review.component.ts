@@ -32,9 +32,11 @@ export class AddReviewComponent implements OnInit {
   }
 
   getErrorMessage(errors: any): string {
+    console.log("ERROR MESSAGE FUNCTION CALLED");
+    console.log(errors)
     if(errors.required) {
       return "is required";
-    } else if(errors.invalidRating) {
+    } else if(errors.invalidRating == true) {
       return "give a rating between 0 and 10"
     }
     return 'an error occurred'
@@ -52,11 +54,11 @@ export class AddReviewComponent implements OnInit {
 
 
 
-function validateRating(control: FormGroup) : { [key: string]: any } {
+function validateRating(control: FormGroup) : { [key: string]: any } | null {
   if(
     parseInt(control.get('rating')?.value) < 0 || parseInt(control.get('rating')?.value) > 10
   ) {
     return {invalidRating: true};
   }
-  return {invalidRating: false};
+  return null;
 }

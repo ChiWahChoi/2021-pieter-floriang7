@@ -11,14 +11,20 @@ import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 })
 export class BeerDataService {
   private _beers: Beer[] = [];
+  //private _beers$ = new BehaviorSubject<Beer[]>([]);
   private _reloadBeers$ = new BehaviorSubject<boolean>(true);
 
   
   constructor(private http: HttpClient) { 
     this.beers$.subscribe((beers: Beer[]) => {
       this._beers = beers;
+      //this._beers$.next(this._beers);
     });
   }
+
+  /*get allBeers$(): Observable<Beer[]> {
+    return this._beers$;
+  }*/
 
   get beers$(): Observable<Beer[]> {
     return this.http.get(`${environment.apiUrl}/beers/`).pipe(
@@ -58,8 +64,8 @@ export class BeerDataService {
   addNewReview(beer: Beer, review: Review) {
     return this.http.post(`${environment.apiUrl}/beers/${beer.id}/reviews/`, review.toJSON())
     .pipe(tap(console.log), catchError(this.handleError), map(Review.fromJSON))
-    .subscribe(() => {
-      this._reloadBeers$.next(true);
+    .subscribe((rec: Review) => { 
+      beer.reviews.push(rec);
     });
   }
 
@@ -68,7 +74,10 @@ export class BeerDataService {
       .delete(`${environment.apiUrl}/beers/${beer.id}/reviews/${review.id}`)
       .pipe(tap(console.log), catchError(this.handleError))
       .subscribe(() => {
-        this._reloadBeers$.next(true)
+        let indexDeletedReview = beer.reviews.findIndex(r => r.id == review.id)
+        if(indexDeletedReview) {
+          beer.reviews.splice(indexDeletedReview, 1);
+        }
       });
   }
  
