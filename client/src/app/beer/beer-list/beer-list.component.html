@@ -13,16 +13,26 @@
                 [value]="filterBeerName"
             />
             </mat-form-field>
+            <!--<mat-form-field> 
+                <input
+                    matInput
+                    
+                    placeholder="country"
+                    type="text"
+                    data-cy="filterInput"
+                    [value]="filterBeerCountry"
+                />
+                </mat-form-field>-->
         </mat-card>
 
         <div *ngIf="beers$ | async as beers; else loadingOrError" class="d-flex flex-wrap">
 
-                <div *ngFor="let beer of (beers | beerFilter: filterBeerName)">
+                <div *ngFor="let beer of beers"> <!-- | beerFilter: filterBeerName -->
                     <app-beer [beer]="beer" data-cy="beerCard"></app-beer>
                 </div>
         </div>  
         <ng-template #loadingOrError>
-            <span *ngIf="errorMessage; else loading">Error loading the beer list: {{ errorMessage }}. <br/>
+            <span *ngIf="errorMessage; else loading" data-cy="appError">Error loading the beer list: {{ errorMessage }}. <br/>
                 Please try again later.</span>
             <ng-template #loading>
             <mat-spinner></mat-spinner>

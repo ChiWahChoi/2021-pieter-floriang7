@@ -16,9 +16,9 @@
                     #spy
                 />
                 
-                <!--<mat-error data-cy="ratingError" *ngIf="review?.get('rating') && review?.get('rating')['errors'] && review?.get('rating').touched">
-                    {{review?.get('rating')? getErrorMessage(review?.get('rating')['errors']): "" }}
-                </mat-error>-->
+                <mat-error data-cy="ratingError" *ngIf="review?.get('rating')!['errors'] && review?.get('rating')!.touched">
+                    <p class="text-danger"> an error occurred</p>
+                </mat-error>
 
             </mat-form-field>
             <mat-form-field appearance="fill" class="me-3">
@@ -31,9 +31,9 @@
                     data-cy="descriptionInput"
                 />
                 
-                <!--<mat-error *ngIf="review.get('description')['errors'] && review.get('description').touched">
-                    {{ getErrorMessage(review.get('description')['errors']) }}
-                </mat-error>-->
+                <mat-error *ngIf="review?.get('description')!['errors'] && review?.get('description')!.touched">
+                    {{ getErrorMessage(review?.get('description')!['errors']) }}
+                </mat-error>
             
             </mat-form-field>
             <button type="submit" mat-raised-button data-cy="addReviewButton">
@@ -46,6 +46,6 @@
         </form>
     </mat-card-content>
 </mat-card>
-REMOVE {{review.value | json}}
+<!--REMOVE {{review.value | json}}-->
 
 

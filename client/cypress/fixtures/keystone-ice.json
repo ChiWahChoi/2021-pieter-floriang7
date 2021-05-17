@@ -1,0 +1,17 @@
+[
+{
+    "id":3,
+    "name":"Keystone Ice",
+    "abv":5.5,
+    "country":"Canada",
+    "image_url":"http://www.thebeerstore.ca/sites/default/files/styles/brand_hero/public/brand/hero/Key_ICE_355mL.jpg?itok=UDkvF6Rl",
+    "reviews":[
+        {
+            "id":4,
+            "rating":8,
+            "description":"This is the description of rating 4",
+            "dateAdded":"2021-04-09T16:50:02.007"
+        }
+    ]
+}
+]

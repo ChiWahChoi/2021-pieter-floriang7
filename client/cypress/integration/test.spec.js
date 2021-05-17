@@ -1,11 +1,14 @@
 describe('First tests', function() {
+    beforeEach(function () {
+        cy.login();
+      });
     it('App runs', function() {
         cy.visit('/');
         cy.get('[data-cy=filterInput]').type('mad');
-        cy.get('[data-cy=beerCard]').should('have.length', 2);
+        cy.get('[data-cy=beerCard]').should('have.length', 13);
     });
     it('mock beer get', function() {
-        cy.server({delay: 1000});
+        cy.server();
         cy.route({
             method: 'GET',
             url: '/api/beers',
@@ -15,7 +18,7 @@ describe('First tests', function() {
         cy.visit('/');
         cy.get('[data-cy=beerCard]').should('have.length', 3);
     });
-    it('on error should show error message', function() { //not yet implemented in BeerListComponent (testing slides 40-43)
+    it('on error should show error message', function() { 
         cy.server();
         cy.route({
             method: 'GET',
@@ -24,15 +27,26 @@ describe('First tests', function() {
             response : 'ERROR'
         });
         cy.visit('/');
-        cy.get('[data-cy=appError]').should('be.visible'); //data-cy attribute not yet added
+        cy.get('[data-cy=appError]').should('be.visible'); 
     });
 });
 
 
 //FORM TESTING
 describe('Testing add review form', function() {
+    beforeEach(function () {
+        cy.login();
+      });
     it('valid data should create a new review', function() {
-        cy.visit('/')
+        cy.server();
+        cy.route({
+            method: 'GET',
+            url: '/api/beers/2',
+            status: 200,
+            response : 'fixtures:mad-jack-mixer.json'
+        });
+
+        cy.visit('/beer/list/detail/2')
         cy.get('[data-cy=ratingInput]')
             .type('7')
             .should('have.value', '7')
@@ -43,7 +57,7 @@ describe('Testing add review form', function() {
         cy.get('[data-cy=addReviewButton]').click()
     });
     it('invalid data should display an error message', function() {
-        cy.visit('/')
+        cy.visit('/beer/list/detail/2')
         cy.get('[data-cy=ratingInput]')
             .type('12')
             .should('have.value', '12')

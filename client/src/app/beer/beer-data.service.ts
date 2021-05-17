@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Review } from './review.model';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Beer } from './beer.model';
@@ -26,6 +26,17 @@ export class BeerDataService {
       catchError(this.handleError),
       map(
         (list: any[]): Beer[] => list.map(Beer.fromJSON))
+    );
+  }
+
+  getBeers$(name?: string, country?: string, abv?: string) {
+    let params = new HttpParams();
+    params = name ? params.append('name', name) : params;
+    params = country ? params.append('country', country) : params;
+    params = abv ? params.append('abv', abv) : params;
+    return this.http.get(`${environment.apiUrl}/beers/`, { params }).pipe(
+      catchError(this.handleError),
+      map((list: any): Beer[] => list.map(Beer.fromJSON))
     );
   }
 
