@@ -12,18 +12,11 @@ import { Review } from '../review.model';
 
 export class AddReviewComponent implements OnInit {
   @Input() public beer!: Beer;
-  //@Output() public newReview = new EventEmitter<Review>();
   private _review: FormGroup = new FormGroup({});
   constructor(private fb: FormBuilder, private _beerDataService: BeerDataService) { }
 
-  /*addReview(reviewScore: HTMLInputElement): boolean {
-    const review = new Review(Number.parseInt(reviewScore.value), "lorem ipsum lorem ipsum lorem ipsum", new Date())
-    this.newReview.emit(review);
-    return false;
-  }*/
 
   onSubmit() {
-    //this.newReview.emit(new Review(this.review.value.rating, this.review.value.description, new Date()));
     this._beerDataService.addNewReview(this.beer, new Review(this.review.value.rating, this.review.value.description, new Date()));
   }
 
@@ -32,11 +25,10 @@ export class AddReviewComponent implements OnInit {
   }
 
   getErrorMessage(errors: any): string {
-    console.log("ERROR MESSAGE FUNCTION CALLED");
     console.log(errors)
     if(errors.required) {
       return "is required";
-    } else if(errors.invalidRating == true) {
+    } else if(errors.invalidRating) {
       return "give a rating between 0 and 10"
     }
     return 'an error occurred'
@@ -55,9 +47,11 @@ export class AddReviewComponent implements OnInit {
 
 
 function validateRating(control: FormGroup) : { [key: string]: any } | null {
+  console.log('VALIDATE RATING')
   if(
-    parseInt(control.get('rating')?.value) < 0 || parseInt(control.get('rating')?.value) > 10
+    parseInt(control.get('rating')!.value) < 0 || parseInt(control.get('rating')!.value) > 10
   ) {
+    console.log('return invalidrating');
     return {invalidRating: true};
   }
   return null;

@@ -17,7 +17,8 @@ import { TopRatedComponent } from './top-rated/top-rated.component';
 const routes: Routes = [
   { path: 'beer/list', canActivate: [AuthGuard], component: BeerListComponent },
   { path: 'beer/list/detail/:id', canActivate: [AuthGuard], component: BeerDetailComponent, resolve: {beer: BeerResolver}},
-  { path: 'beer/top-rated', canActivate: [AuthGuard], component: TopRatedComponent }
+  { path: 'beer/top-rated', canActivate: [AuthGuard], component: TopRatedComponent },
+  { path: 'beer/top-rated/detail/:id', canActivate: [AuthGuard], component: BeerDetailComponent, resolve: {beer: BeerResolver}}
 ];
 
 @NgModule({
