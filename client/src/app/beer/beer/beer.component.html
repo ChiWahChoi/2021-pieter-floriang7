@@ -2,7 +2,7 @@
     <mat-card-content>
         <div class="d-flex flex-row">
                 <div class="img-container pe-3">
-                    <img src="{{beer.image_url}}"/>   
+                    <img src="{{beer.image_url}}" onerror="this.src='/assets/images/beer.png';"/>   
                 </div>     
             <div>
                 <p data-cy="beer-title"><span class="fw-bold">Name</span><br>{{ beer.name }}</p>
