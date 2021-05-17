@@ -70,10 +70,5 @@ namespace Api.Data.Repositories
         {
             _context.Update(beer);
         }
-
-        public void Update(Review review)
-        {
-            _context.Update(review);
-        }
     }
 }

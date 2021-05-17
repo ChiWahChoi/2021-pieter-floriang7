@@ -115,30 +115,6 @@ namespace Api.Controllers
 
         }
 
-        /// <summary>
-        /// PUT updates a review
-        /// </summary>
-        /// <param name="id">id of a beer</param>
-        /// <param name="reviewId">id of a review</param>
-        /// <param name="review">review that will be updated</param>
-        /// <returns></returns>
-        [HttpPut("{id}/reviews/{reviewId}")]
-        public IActionResult PutReview(int id, int reviewId, Review review)
-        {
-            if (!_beerRepository.TryGetBeer(id, out var beer))
-            {
-                return NotFound();
-            }
-
-            if (reviewId != review.Id)
-            {
-                return BadRequest();
-            }
-
-            _beerRepository.Update(review);
-            _beerRepository.SaveChanges();
-            return NoContent();
-        }
 
         /// <summary>
         /// GET returns a review by id

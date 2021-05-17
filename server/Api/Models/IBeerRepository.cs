@@ -14,7 +14,6 @@ namespace Api.Models
         IEnumerable<Beer> GetTopRated();
         void Add(int id, Review review);
         void Delete(int id, Review review);
-        void Update(Review review);
         void SaveChanges();
         void Update(Beer beer);
     }
