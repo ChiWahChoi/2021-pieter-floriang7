@@ -6,6 +6,7 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item [routerLink]="['beer/list']">Beers</a>
+      <a mat-list-item [routerLink]="['beer/top-rated']">Top Rated</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="sidenav-content">
@@ -18,7 +19,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span class="text-uppercase fw-bold fs-3 text-white">The Beer Review</span>
+      <span class="text-uppercase fw-bold fs-3 text-white d-none d-sm-block">The Beer Review</span>
 
 
       <span class="fill-space"></span>

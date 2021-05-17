@@ -35,6 +35,15 @@ export class BeerDataService {
       .pipe(tap(console.log),catchError(this.handleError), map(Beer.fromJSON)); 
   }
 
+  getTopRated$(): Observable<Beer[]> {
+    return this.http.get(`${environment.apiUrl}/beers/toprated`).pipe(
+      tap(console.log),
+      catchError(this.handleError),
+      map(
+        (list: any[]): Beer[] => list.map(Beer.fromJSON))
+    );
+  }
+
   addNewReview(beer: Beer, review: Review) {
     return this.http.post(`${environment.apiUrl}/beers/${beer.id}/reviews/`, review.toJSON())
     .pipe(tap(console.log), catchError(this.handleError), map(Review.fromJSON))

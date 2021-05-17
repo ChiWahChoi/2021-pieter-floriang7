@@ -12,10 +12,12 @@ import { BeerDetailComponent } from './beer-detail/beer-detail.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BeerResolver } from './BeerResolver';
 import { AuthGuard } from '../user/auth.guard';
+import { TopRatedComponent } from './top-rated/top-rated.component';
 
 const routes: Routes = [
   { path: 'beer/list', canActivate: [AuthGuard], component: BeerListComponent },
-  { path: 'beer/list/detail/:id', canActivate: [AuthGuard], component: BeerDetailComponent, resolve: {beer: BeerResolver}}
+  { path: 'beer/list/detail/:id', canActivate: [AuthGuard], component: BeerDetailComponent, resolve: {beer: BeerResolver}},
+  { path: 'beer/top-rated', canActivate: [AuthGuard], component: TopRatedComponent }
 ];
 
 @NgModule({
@@ -25,7 +27,8 @@ const routes: Routes = [
     BeerListComponent,
     AddReviewComponent,
     BeerFilterPipe,
-    BeerDetailComponent
+    BeerDetailComponent,
+    TopRatedComponent
   ],
   imports: [
     CommonModule,

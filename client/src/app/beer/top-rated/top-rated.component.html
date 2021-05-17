@@ -1,23 +1,9 @@
 <div class="container">
-    <h1 class="my-5">Beers</h1>
+    <h1 class="my-5">Top Rated</h1>
     <div>
-        <mat-card>
-            <h3>Filters</h3>
-            <mat-form-field> 
-            <input
-                matInput
-                (keyup)="filterBeer$.next($any($event.target).value)"
-                placeholder="name"
-                type="text"
-                data-cy="filterInput"
-                [value]="filterBeerName"
-            />
-            </mat-form-field>
-        </mat-card>
-
         <div *ngIf="beers$ | async as beers; else loadingOrError" class="d-flex flex-wrap">
 
-                <div *ngFor="let beer of (beers | beerFilter: filterBeerName)">
+                <div *ngFor="let beer of beers">
                     <app-beer [beer]="beer" data-cy="beerCard"></app-beer>
                 </div>
         </div>  
