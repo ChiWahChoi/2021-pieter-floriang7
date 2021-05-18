@@ -41,9 +41,9 @@ describe('Testing add review form', function() {
         cy.server();
         cy.route({
             method: 'GET',
-            url: '/api/beers/2',
+            url: '/api/beers/1',
             status: 200,
-            response : 'fixtures:mad-jack-mixer.json'
+            response : 'fixture:mad-jack-mixer.json'
         });
 
         cy.visit('/beer/list/detail/2')

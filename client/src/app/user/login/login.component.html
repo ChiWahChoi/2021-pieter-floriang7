@@ -13,6 +13,7 @@
               aria-label="email"
               data-cy="login-email"
               formControlName="username"
+              data-cy="usernameInput"
             />
           </mat-form-field>
   
@@ -24,6 +25,7 @@
               aria-label="password"
               data-cy="login-password"
               formControlName="password"
+              data-cy="passwordInput"
             />
           </mat-form-field>
         </mat-card-content>
@@ -34,15 +36,15 @@
             mat-raised-button
             type="submit"
             color="primary"
-            data-cy="login-button"
+            data-cy="loginButton"
           >
             Login
           </button>
         </mat-card-actions>
       </form>
-      <mat-card class="error" *ngIf="errorMessage" data-cy="appError">
-        got an error while loading the recipe list: {{ errorMessage }}
-      </mat-card>
+      <mat-error class="error" *ngIf="errorMessage" data-cy="loginError">
+        {{ errorMessage }}
+      </mat-error>
     </mat-card>
   </div>
   
