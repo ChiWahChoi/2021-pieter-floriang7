@@ -126,19 +126,15 @@ export class RegisterComponent implements OnInit {
               this.router.navigateByUrl(this.authService.redirectUrl);
               this.authService.redirectUrl = null; //undefined;
             } else {
-              this.router.navigate(['/recipe/list']);
+              this.router.navigate(['/beer/list']);
             }
           } else {
             this.errorMessage = `Could not login`;
           }
         },
         (err: HttpErrorResponse) => {
-          console.log(err);
-          if (err.error instanceof Error) {
-            this.errorMessage = `Error while trying to login user ${this.user.value.email}: ${err.error.message}`;
-          } else {
-            this.errorMessage = `Error ${err.status} while trying to login user ${this.user.value.email}: ${err.error}`;
-          }
+          let errorJSON = JSON.parse(err.error);
+          this.errorMessage = `Error while trying to register user: ${errorJSON.title}`;
         }
       );
   }

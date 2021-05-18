@@ -13,6 +13,7 @@
                 aria-label="first name"
                 data-cy="register-firstname"
                 formControlName="firstname"
+                data-cy="firstnameInput"
               />
               <mat-error
                 *ngIf="
@@ -29,6 +30,7 @@
                 aria-label="last name"
                 data-cy="register-lastname"
                 formControlName="lastname"
+                data-cy="lastnameInput"
               />
               <mat-error
                 *ngIf="
@@ -46,9 +48,11 @@
               aria-label="email"
               data-cy="register-email"
               formControlName="email"
+              data-cy="emailInput"
             />
             <mat-error
               *ngIf="user.get('email')!.errors && user.get('email')!.touched"
+              data-cy="emailError"
             >
               {{ getErrorMessage(user.get('email')!.errors) }}
             </mat-error>
@@ -62,6 +66,7 @@
                 aria-label="password"
                 data-cy="register-password"
                 formControlName="password"
+                data-cy="passwordInput"
               />
               <mat-error
                 *ngIf="
@@ -84,12 +89,13 @@
                 aria-label="confirm password"
                 data-cy="register-confirm-password"
                 formControlName="confirmPassword"
+                data-cy="passwordConfirmInput"
               />
               <mat-error
                 *ngIf="
                   user.get('passwordGroup')!.get('confirmPassword')!.errors &&
                   user.get('passwordGroup')!.get('confirmPassword')!.touched
-                "
+                "        
               >
                 {{
                   getErrorMessage(
@@ -104,6 +110,7 @@
                 user.get('passwordGroup')!.get('confirmPassword')!.touched &&
                 user.get('passwordGroup')!.get('password')!.touched
               "
+              data-cy="passwordGroupErrors"
             >
               {{ getErrorMessage(user.get('passwordGroup')!.errors) }}
             </mat-error>
@@ -117,14 +124,14 @@
             mat-raised-button
             type="submit"
             color="primary"
-            data-cy="register-button"
+            data-cy="registerButton"
           >
             Register
           </button>
         </mat-card-actions>
       </form>
-      <mat-card class="error" *ngIf="errorMessage" data-cy="appError">
-        got an error while loading the recipe list: {{ errorMessage }}
+      <mat-card class="text-danger" *ngIf="errorMessage" data-cy="appError">
+        {{ errorMessage }}
       </mat-card>
     </mat-card>
   </div>
