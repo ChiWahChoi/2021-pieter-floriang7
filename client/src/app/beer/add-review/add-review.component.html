@@ -4,35 +4,33 @@
     </mat-card-header>
     <mat-card-content>
         <form [formGroup]="review" (ngSubmit)="onSubmit()"> 
-            <mat-form-field appearance="fill" class="me-3">
+            <mat-form-field appearance="fill" class="me-3" data-cy="ratingInput">
                 <mat-label class="text-black">Rating (0-10)</mat-label>
                 <input 
                     matInput 
                     aria-label="rating" 
                     type="text"
-                    formControlName="rating"
-                    data-cy="ratingInput"
+                    formControlName="rating"           
                     required                  
                 />
                 
-                <mat-error data-cy="ratingError" *ngIf="review?.get('rating')!['errors'] && review?.get('rating')!.touched">
+                <mat-error *ngIf="review?.get('rating')!['errors'] && review?.get('rating')!.touched">
                     {{ getErrorMessage(review?.get('rating')!['errors']) }}   
                 </mat-error>
 
             </mat-form-field>
 
-            <mat-form-field appearance="fill" class="me-3">
+            <mat-form-field appearance="fill" class="me-3" data-cy="descriptionInput">
                 <mat-label>Description</mat-label>
                 <input 
                     matInput 
                     aria-label="description" 
                     type="text"
                     formControlName="description"
-                    data-cy="descriptionInput"
                     required
                 />
                 
-                <mat-error *ngIf="review?.get('description')!['errors'] && review?.get('description')!.touched">
+                <mat-error data-cy="descriptionError" *ngIf="review?.get('description')!['errors'] && review?.get('description')!.touched">
                     {{ getErrorMessage(review?.get('description')!['errors']) }}
                 </mat-error>  
             
@@ -40,7 +38,7 @@
             <button type="submit" mat-raised-button data-cy="addReviewButton">
                 Add 
             </button>
-            <mat-error *ngIf="review.errors" class="error">
+            <mat-error data-cy="ratingError" *ngIf="review.errors" class="error">
                 {{ getErrorMessage(review.errors) }}
             </mat-error>
         </form>

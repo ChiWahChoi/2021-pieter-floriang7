@@ -5,11 +5,11 @@
                     <img src="{{beer.image_url}}" onerror="this.src='/assets/images/beer.png';"/>   
                 </div>     
             <div>
-                <p data-cy="beer-title"><span class="fw-bold">Name</span><br>{{ beer.name }}</p>
+                <p data-cy="beerTitle"><span class="fw-bold">Name</span><br>{{ beer.name }}</p>
                 <p><span class="fw-bold">Abv (%)</span><br>{{ beer.abv }}</p>
                 <p><span class="fw-bold">Country</span><br>{{ beer.country }}</p>
                 <p><span class="fw-bold">Rating</span><br><span *ngIf="averageRating != 0">{{ averageRating }}</span> <span *ngIf="beer.reviews.length == 0">No rating</span> </p>
-                <a class="btn btn-light" [routerLink]="['detail', beer.id]"><span class="fw-bold">Details</span></a>    
+                <a class="btn btn-light" [routerLink]="['detail', beer.id]" data-cy="detailsButton"><span class="fw-bold">Details</span></a>    
             </div>
         </div>
     </mat-card-content>
