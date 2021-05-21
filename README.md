@@ -20,5 +20,5 @@ Server
 - dotnet run
 
 Angular Application & API are published online on AZURE
-- Angular Application:
-- API: 
+- Angular Application: https://thebeerreviewwebiv.azurewebsites.net/
+- API: https://beerapiwebiv.azurewebsites.net/swagger/index.html
