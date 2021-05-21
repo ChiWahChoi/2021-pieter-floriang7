@@ -16,13 +16,13 @@ namespace Api.Data
         {
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if(!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer("Server=.;Database=beersdb;Trusted_Connection=True");
             }
-        }
+        }*/
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -67,19 +67,22 @@ namespace Api.Data
 
 
             //seeding database
-            /*builder.Entity<Beer>().HasData(
-                    new Beer { Id = 1, Name = "Stella", Abv = 4.5, Country = "Belgium"},
-                    new Beer { Id = 2, Name = "Duvel", Abv = 8.5, Country = "Belgium" },
-                    new Beer { Id = 3, Name = "Maes", Abv = 4.0, Country = "Belgium" }
+            builder.Entity<Beer>().HasData(
+                    new Beer { Id = 1, Name = "Stella", Abv = 4.5, Country = "Belgium", Image_url= "https://www.biernet.nl/images/soort/17524-Stella%20Artois.jpg" },
+                    new Beer { Id = 2, Name = "Duvel", Abv = 8.5, Country = "Belgium", Image_url = "https://www.drankgigant.nl/media/catalog/product/cache/5302153a4b78cff75d07c130fe2dbf33/d/u/duvel_1.jpg" },
+                    new Beer { Id = 3, Name = "Maes", Abv = 4.0, Country = "Belgium", Image_url = "" },
+                    new Beer { Id = 4, Name = "Heiniken", Abv = 4.5, Country = "The Netherlands", Image_url = "" },
+                    new Beer { Id = 5, Name = "Mad Jack Max", Abv = 4.5, Country = "The United States", Image_url = "" }
                 );
-            */
-            /*builder.Entity<Review>().HasData(
-                    new {Id = 1, Rating = 4, Description = "This is the description of review 1", DateAdded = DateTime.Now, BeerId = 1},
-                    new { Id = 2, Rating = 3, Description = "This is the description of review 2", DateAdded = DateTime.Now, BeerId = 2},
-                    new { Id = 3, Rating = 5, Description = "This is the description of review 3", DateAdded = DateTime.Now, BeerId = 3},
-                    new { Id = 3, Rating = 2, Description = "This is the description of review 4", DateAdded = DateTime.Now, BeerId = 3 }
+            
+            builder.Entity<Review>().HasData(
+                    new {Id = 1, Rating = 6.0, Description = "This tasted decent", DateAdded = DateTime.Now, BeerId = 1},
+                    new { Id = 2, Rating = 8.0, Description = "This beer tasted good", DateAdded = DateTime.Now, BeerId = 2},
+                    new { Id = 3, Rating = 5.5, Description = "This was a mediocre beer", DateAdded = DateTime.Now, BeerId = 3},
+                    new { Id = 4, Rating = 9.0, Description = "The taste was sublime", DateAdded = DateTime.Now, BeerId = 4},
+                    new { Id = 5, Rating = 6.0, Description = "The beer tasted ok", DateAdded = DateTime.Now, BeerId = 5}
 
-                );*/
+                );
         }
 
         public DbSet<Beer> Beers { get; set; }

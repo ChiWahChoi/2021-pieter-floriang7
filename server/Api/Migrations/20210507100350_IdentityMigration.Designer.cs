@@ -16,7 +16,7 @@ namespace Api.Migrations
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
+            /*modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -406,7 +406,7 @@ namespace Api.Migrations
                 {
                     b.Navigation("Favorites");
                 });
-#pragma warning restore 612, 618
+#pragma warning restore 612, 618*/
         }
     }
 }

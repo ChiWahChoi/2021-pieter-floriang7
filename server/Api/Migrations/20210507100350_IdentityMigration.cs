@@ -7,7 +7,7 @@ namespace Api.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
+            /*migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -46,7 +46,7 @@ namespace Api.Migrations
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
-            /*migrationBuilder.CreateTable(
+            *//*migrationBuilder.CreateTable(
                 name: "Beers",
                 columns: table => new
                 {
@@ -60,7 +60,7 @@ namespace Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Beers", x => x.BeerId);
-                });*/
+                });*//*
 
             migrationBuilder.CreateTable(
                 name: "Customers",
@@ -183,7 +183,7 @@ namespace Api.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            /*migrationBuilder.CreateTable(
+            *//*migrationBuilder.CreateTable(
                 name: "Reviews",
                 columns: table => new
                 {
@@ -203,7 +203,7 @@ namespace Api.Migrations
                         principalTable: "Beers",
                         principalColumn: "BeerId",
                         onDelete: ReferentialAction.Cascade);
-                });*/
+                });*//*
 
             migrationBuilder.CreateTable(
                 name: "CustomerFavorite",
@@ -276,12 +276,12 @@ namespace Api.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_BeerId",
                 table: "Reviews",
-                column: "BeerId");
+                column: "BeerId");*/
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
+            /*migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -299,8 +299,8 @@ namespace Api.Migrations
             migrationBuilder.DropTable(
                 name: "CustomerFavorite");
 
-            /*migrationBuilder.DropTable(
-                name: "Reviews");*/
+            *//*migrationBuilder.DropTable(
+                name: "Reviews");*//*
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -311,7 +311,7 @@ namespace Api.Migrations
             migrationBuilder.DropTable(
                 name: "Customers");
 
-            /*migrationBuilder.DropTable(
+            *//*migrationBuilder.DropTable(
                 name: "Beers");*/
         }
     }

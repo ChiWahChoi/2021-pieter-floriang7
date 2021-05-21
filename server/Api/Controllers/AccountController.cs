@@ -103,7 +103,8 @@ namespace RecipeApi.Controllers
               new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
+            //var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTYyMDM4MDQxOSwiaWF0IjoxNjIwMzgwNDE5fQ.xGg1TTrFJrr4RzVB2VQT5RoUfmslQsD68pp9LsPHG6g"));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 

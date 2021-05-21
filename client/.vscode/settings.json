@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/c154c45b-7aff-40af-bf58-abe15779200f/resourceGroups/WEBIVResourceGroup/providers/Microsoft.Web/sites/TheBeerReviewWebIV",
+    "appService.deploySubpath": "dist\\client"
+}

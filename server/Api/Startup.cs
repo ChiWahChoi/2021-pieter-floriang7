@@ -34,11 +34,33 @@ namespace Api
         {      
             services.AddControllers();
             services.AddDbContext<BeerContext>(options =>
-          options.UseSqlServer(Configuration.GetConnectionString("BeerContext")));
+            options.UseSqlite(Configuration.GetConnectionString("BeerContext")));
+          //options.UseSqlServer(Configuration.GetConnectionString("BeerContext")));
 
             services.AddScoped<BeerDataInitializer>();
             services.AddScoped<IBeerRepository, BeerRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                      Encoding.UTF8.GetBytes(Configuration["Tokens:Key"])),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    RequireExpirationTime = true //Ensure token hasn't expired
+                };
+            });
+
 
             services.AddOpenApiDocument(c =>
             {
@@ -56,7 +78,7 @@ namespace Api
                 c.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
             });
 
-            services.AddCors(options => options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin()));
+            //services.AddCors(options => options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin()));
 
             services.AddIdentity<IdentityUser, IdentityRole>(cfg => cfg.User.RequireUniqueEmail = true).AddEntityFrameworkStores<BeerContext>();
 
@@ -81,14 +103,14 @@ namespace Api
                 options.User.RequireUniqueEmail = true;
             });
 
-            services.AddAuthentication(x => { 
+            /*services.AddAuthentication(x => { 
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; 
             }).AddJwtBearer(x => { 
                 x.SaveToken = true; x.TokenValidationParameters = new TokenValidationParameters { 
                     ValidateIssuerSigningKey = true, IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"])),
                     ValidateIssuer = false, ValidateAudience = false, RequireExpirationTime = true 
                 }; 
-            });
+            });*/
 
             services.AddAuthorization(options => { options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role, "admin")); });
 
@@ -120,7 +142,7 @@ namespace Api
             });
 
             //initialize data
-            beerDataInitializer.InitializeData();
+            beerDataInitializer.InitializeDataAsync().Wait();
         }
     }
 }
