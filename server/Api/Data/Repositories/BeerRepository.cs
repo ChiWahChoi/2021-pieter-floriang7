@@ -47,9 +47,9 @@ namespace Api.Data.Repositories
         {
             var beers = _beers.AsNoTracking().Include(b => b.Reviews).AsQueryable();
             if (!string.IsNullOrEmpty(name))
-                beers = beers.Where(b => b.Name.IndexOf(name) >= 0);
+                beers = beers.Where(b => b.Name.ToLower().IndexOf(name.ToLower()) >= 0);
             if (!string.IsNullOrEmpty(country))
-                beers = beers.Where(b => b.Country == country);
+                beers = beers.Where(b => b.Country.ToLower() == country.ToLower());
             if (!string.IsNullOrEmpty(abv))
                 beers = beers.Where(b => b.Abv.ToString().Equals(abv));
             return beers.OrderBy(b => b.Name).ToList();
